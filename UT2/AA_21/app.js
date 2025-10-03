@@ -4,6 +4,7 @@ let sueldosBruto = new Array();
 let sueldosNetos = new Array();
 for (i = 0; i < Numeroempleados; i++) {
     let nombreEmpleado = prompt("Introduce el nombre de esos " + Numeroempleados + " empleados");
+    empleados.push(nombreEmpleado);
     let horas = parseInt(prompt("Introduce las horas que trabajó " + nombreEmpleado + " Esta semana"));
     let pagoHora = parseFloat(prompt("Introduce el pago por hora del empleado " + nombreEmpleado));
 
@@ -14,6 +15,7 @@ for (i = 0; i < Numeroempleados; i++) {
     } else if (horas > 40) {
         sueldoBruto = (pagoHora * 40) + horasExtra;
     }
+    sueldosBruto.push(sueldoBruto);
 
     let impuesto;
     if (sueldoBruto > 1000) {
@@ -23,12 +25,27 @@ for (i = 0; i < Numeroempleados; i++) {
     }
 
     let sueldoNeto = sueldoBruto - impuesto;
-
-    empleados.push(nombreEmpleado);
-    sueldosBruto.push(sueldoBruto);
+    
     sueldosNetos.push(sueldoNeto);
 
 }
 console.log(empleados);
 console.log(sueldosBruto);
 console.log(sueldosNetos); 
+
+let eliminarEmpleado = prompt("Introduce el nombre del empleado que quiera eliminar, en caso contrario déjelo vacío: ");
+let incluye = empleados.indexOf(eliminarEmpleado);
+if(incluye !== -1){
+    delete empleados[incluye];
+    delete sueldosBruto[incluye];
+    delete sueldosNetos[incluye];
+    console.log("Empleado: "+eliminarEmpleado+" se ha eliminado correctamente")
+} else if(eliminarEmpleado == ""){
+    console.log("No quiere eliminar ningún empleado");
+} else{
+    console.log("Empleado no encontrado")
+}
+
+for(i=0;i<empleados.length;i++){ 
+        console.log("Empleado: " +empleados[i]+" Sueldo Bruto: "+sueldosBruto[i]+" Sueldo Neto: "+sueldosNetos[i]); 
+    }
